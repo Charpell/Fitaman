@@ -29,6 +29,7 @@ function totalItems(cart) {
 
 class TakeMyMoney extends Component {
   onToken = async (res, createOrder) => {
+    NProgress.start()
     // manually call the mutation once we have the stipe token
     const order = await createOrder({
       variables: {
@@ -36,6 +37,11 @@ class TakeMyMoney extends Component {
       },
     }).catch(err => {
       alert(err.message)
+    })
+
+    Router.push({
+      pathname: '/order',
+      query: { id: order.data.createOrder.id }
     })
   }
 
