@@ -28,9 +28,9 @@ function totalItems(cart) {
 }
 
 class TakeMyMoney extends Component {
-  onToken = (res, createOrder) => {
+  onToken = async (res, createOrder) => {
     // manually call the mutation once we have the stipe token
-    createOrder({
+    const order = await createOrder({
       variables: {
         token: res.id
       },
